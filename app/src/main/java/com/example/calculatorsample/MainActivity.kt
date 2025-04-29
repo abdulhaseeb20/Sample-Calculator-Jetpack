@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -61,46 +60,62 @@ fun GreetingPreview() {
 @Preview(showBackground = true)
 @Composable
 fun BackgroundTheme() {
-    Column(
-
-    ) {
-        Row (
-        ) {
+    val orange = Color(0xFFFF9800)
+    Column {
+        Row {
             // AC +/- % /
-            CalculatorButton(text = "AC")
-            CalculatorButton(text = "+/-")
-            CalculatorButton(text = "%")
+            CalculatorButton(text = "AC", containerColor = Color.Gray)
+            CalculatorButton(text = "+/-", containerColor = Color.Gray)
+            CalculatorButton(text = "%", containerColor = Color.Gray)
+            CalculatorButton(text = "/", containerColor = orange)
         }
         Row {
             // 7 8 9 X
+            CalculatorButton(text = "7", containerColor = Color.DarkGray)
+            CalculatorButton(text = "8", containerColor = Color.DarkGray)
+            CalculatorButton(text = "9", containerColor = Color.DarkGray)
+            CalculatorButton(text = "X", containerColor = orange)
         }
         Row {
             // 4 5 6 -
+            CalculatorButton(text = "4", containerColor = Color.DarkGray)
+            CalculatorButton(text = "5", containerColor = Color.DarkGray)
+            CalculatorButton(text = "6", containerColor = Color.DarkGray)
+            CalculatorButton(text = "-", containerColor = orange)
         }
         Row {
             // 1 2 3 +
+            CalculatorButton(text = "1", containerColor = Color.DarkGray)
+            CalculatorButton(text = "2", containerColor = Color.DarkGray)
+            CalculatorButton(text = "3", containerColor = Color.DarkGray)
+            CalculatorButton(text = "+", containerColor = orange)
         }
         Row {
             // * 0 . =
+            CalculatorButton(text = "^", containerColor = Color.DarkGray)
+            CalculatorButton(text = "0", containerColor = Color.DarkGray)
+            CalculatorButton(text = ".", containerColor = Color.DarkGray)
+            CalculatorButton(text = "=", containerColor = orange)
         }
     }
 }
 
 @Composable
-fun CalculatorButton(text: String) {
+fun CalculatorButton(text: String, containerColor: Color) {
     Button(
         onClick = { /*TODO*/ },
         shape = CircleShape,
         modifier = Modifier
+            .padding(2.dp)
             .width(14.dp)
             .height(14.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.DarkGray,
+            containerColor = containerColor,
             contentColor = Color.White
         ),
         contentPadding = PaddingValues(0.dp),
 
-    )
+        )
     {
         Text(
             text = text,
