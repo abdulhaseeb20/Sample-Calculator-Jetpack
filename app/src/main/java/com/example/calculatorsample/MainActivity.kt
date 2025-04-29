@@ -3,6 +3,7 @@ package com.example.calculatorsample
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    BackgroundTheme()
                 }
             }
         }
@@ -53,7 +54,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     CalculatorSampleTheme {
-        Greeting("Android")
+        BackgroundTheme()
     }
 }
 
@@ -61,36 +62,39 @@ fun GreetingPreview() {
 @Composable
 fun BackgroundTheme() {
     val orange = Color(0xFFFF9800)
-    Column {
-        Row {
+    Column (
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ){
+        Row (horizontalArrangement = Arrangement.spacedBy(8.dp)){
             // AC +/- % /
             CalculatorButton(text = "AC", containerColor = Color.Gray)
             CalculatorButton(text = "+/-", containerColor = Color.Gray)
             CalculatorButton(text = "%", containerColor = Color.Gray)
             CalculatorButton(text = "/", containerColor = orange)
         }
-        Row {
+        Row (horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             // 7 8 9 X
             CalculatorButton(text = "7", containerColor = Color.DarkGray)
             CalculatorButton(text = "8", containerColor = Color.DarkGray)
             CalculatorButton(text = "9", containerColor = Color.DarkGray)
             CalculatorButton(text = "X", containerColor = orange)
         }
-        Row {
+        Row (horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             // 4 5 6 -
             CalculatorButton(text = "4", containerColor = Color.DarkGray)
             CalculatorButton(text = "5", containerColor = Color.DarkGray)
             CalculatorButton(text = "6", containerColor = Color.DarkGray)
             CalculatorButton(text = "-", containerColor = orange)
         }
-        Row {
+        Row (horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             // 1 2 3 +
             CalculatorButton(text = "1", containerColor = Color.DarkGray)
             CalculatorButton(text = "2", containerColor = Color.DarkGray)
             CalculatorButton(text = "3", containerColor = Color.DarkGray)
             CalculatorButton(text = "+", containerColor = orange)
         }
-        Row {
+        Row (horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             // * 0 . =
             CalculatorButton(text = "^", containerColor = Color.DarkGray)
             CalculatorButton(text = "0", containerColor = Color.DarkGray)
@@ -107,19 +111,18 @@ fun CalculatorButton(text: String, containerColor: Color) {
         shape = CircleShape,
         modifier = Modifier
             .padding(2.dp)
-            .width(14.dp)
-            .height(14.dp),
+            .width(64.dp)
+            .height(64.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = Color.White
         ),
         contentPadding = PaddingValues(0.dp),
-
         )
     {
         Text(
             text = text,
-            fontSize = 5.sp
+            fontSize = 20.sp
         )
     }
 }
