@@ -30,11 +30,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import net.objecthunter.exp4j.ExpressionBuilder
 import com.example.calculatorsample.ui.theme.CalculatorSampleTheme
 
 class MainActivity : ComponentActivity() {
@@ -52,14 +52,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
 @Preview(showBackground = true, wallpaper = Wallpapers.NONE)
@@ -111,226 +103,146 @@ fun BackgroundTheme() {
                     inputState.value = ""
                 })
                 CalculatorButton(text = "+/-", containerColor = Color.Gray, onClick = {
-
+                    try {
+                        firstNumber.value = inputState.value.toInt()
+                        operator.value = "+/-"
+                        inputState.value = ""
+                    } catch (e: Exception) {
+                        inputState.value = "Error"
+                    }
                 })
                 CalculatorButton(text = "%", containerColor = Color.Gray, onClick = {
-//                    firstNumber.value = inputState.value.toInt()
-                    operator.value = "%"
+                    try {
+                        firstNumber.value = inputState.value.toInt()
+                        operator.value = "%"
+                        inputState.value = ""
+                    } catch (e: Exception) {
+                        inputState.value = "Error"
+                    }
                 })
                 CalculatorButton(text = "/", containerColor = orange, onClick = {
-//                    firstNumber.value = inputState.value.toInt()
-                    operator.value = "/"
-                    inputState.value += "/"
+                    try {
+                        firstNumber.value = inputState.value.toInt()
+                        operator.value = "/"
+                        inputState.value = ""
+                    } catch (e: Exception) {
+                        inputState.value = "Error"
+                    }
                 })
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 // 7 8 9 X
                 CalculatorButton(text = "7", containerColor = Color.DarkGray, onClick = {
-                    if (inputState.value.isEmpty())
-                    {
-//                        firstNumber.value = 7
-                        inputState.value = "7"
-                    }
-                    else
-                    {
-                        inputState.value += "7"
-//                        firstNumber.value = 7
-                    }
+                    inputState.value = "7"
                 })
                 CalculatorButton(text = "8", containerColor = Color.DarkGray, onClick = {
-                    if (inputState.value.isEmpty())
-                    {
-                        firstNumber.value = 8
-                        inputState.value = "8"
-                    }
-                    else
-                    {
-                        firstNumber.value = 8
-                        inputState.value += "8"
-                    }
+                    inputState.value = "8"
                 })
                 CalculatorButton(text = "9", containerColor = Color.DarkGray, onClick = {
-                    if (inputState.value.isEmpty())
-                    {
-                        firstNumber.value = 9
-                        inputState.value = "9"
-                    }
-                    else
-                    {
-                        firstNumber.value = 9
-                        inputState.value += "9"
-                    }
+                    inputState.value = "9"
                 })
                 CalculatorButton(text = "X", containerColor = orange, onClick = {
                     try {
                         firstNumber.value = inputState.value.toInt()
                         operator.value = "X"
-                        inputState.value += "X"
+                        inputState.value = ""
                     } catch (e: Exception) {
                         inputState.value = "Error"
                     }
                 })
-
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 // 4 5 6 -
                 CalculatorButton(text = "4", containerColor = Color.DarkGray, onClick = {
-                    if (inputState.value.isEmpty())
-                    {
-//                        firstNumber.value = 4
-//                        inputState.value = "4"
-                        // ****     DEBUG HERE      *****
-
-                        if (operator.value?.isEmpty() == true)
-                        {
-                            firstNumber.value = 4
-//                            Log.DEBUG
-                        }
-                        else
-                        {
-                            secondNumber.value = 4
-                        }
-                        inputState.value += "4"
-                    }
+                    inputState.value = "4"
 
                 })
                 CalculatorButton(text = "5", containerColor = Color.DarkGray, onClick = {
-                    if (inputState.value.isEmpty())
-                    {
-//                        firstNumber.value = 5
-//                        inputState.value = "5"
-
-                        if (operator.value?.isEmpty() == true)
-                        {
-                            firstNumber.value = 5
-//                            Log.DEBUG
-                        }
-                        else
-                        {
-                            secondNumber.value = 5
-                        }
-                        inputState.value += "5"
-                    }
+                    inputState.value = "5"
 
                 })
                 CalculatorButton(text = "6", containerColor = Color.DarkGray, onClick = {
-                    if (inputState.value.isEmpty())
-                    {
-//                        firstNumber.value = 6
-//                        inputState.value = "6"
-
-                        if (operator.value?.isEmpty() == true)
-                        {
-                            firstNumber.value = 6
-//                            Log.DEBUG
-                        }
-                        else
-                        {
-                            secondNumber.value = 6
-                        }
-                        inputState.value += "6"
-                    }
-
+                    inputState.value = "6"
                 })
                 CalculatorButton(text = "-", containerColor = orange, onClick = {
-//                    firstNumber.value = inputState.value.toInt()
-                    operator.value = "-"
-                    inputState.value += "-"
+                    try {
+                        firstNumber.value = inputState.value.toInt()
+                        operator.value = "-"
+                        inputState.value = ""
+                    } catch (e: Exception) {
+                        inputState.value = "Error"
+                    }
                 })
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 // 1 2 3 +
                 CalculatorButton(text = "1", containerColor = Color.DarkGray, onClick = {
-                    if (inputState.value.isEmpty())
-                    {
-                        firstNumber.value = 1
-                        inputState.value += "1"
-
-                        if (operator.value?.isEmpty() == true)
-                        {
-                            firstNumber.value = 6
-//                            Log.DEBUG
-                        }
-                        else
-                        {
-                            secondNumber.value = 6
-                        }
-                        inputState.value += "6"
-                    }
-                    else
-                    {
-                        firstNumber.value = inputState.value.toInt()
-                    }
+                    inputState.value = "1"
                 })
                 CalculatorButton(text = "2", containerColor = Color.DarkGray, onClick = {
-                    if (inputState.value.isEmpty())
-                    {
-                        firstNumber.value = 2
-                        inputState.value += "2"
-                    }
-                    else
-                    {
-                        firstNumber.value = inputState.value.toInt()
-                    }
+                    inputState.value = "2"
                 })
                 CalculatorButton(text = "3", containerColor = Color.DarkGray, onClick = {
-                    if (inputState.value.isEmpty())
-                    {
-                        firstNumber.value = 3
-                        inputState.value += "3"
-                    }
-                    else
-                    {
-                        firstNumber.value = inputState.value.toInt()
-                    }
+                    inputState.value = "3"
                 })
                 CalculatorButton(text = "+", containerColor = orange, onClick = {
-//                    firstNumber.value = inputState.value.toInt()
-                    operator.value = "+"
-                    inputState.value += "+"
+                    try {
+                        firstNumber.value = inputState.value.toInt()
+                        operator.value = "+"
+                        inputState.value = ""
+                    } catch (e: Exception) {
+                        inputState.value = "Error"
+                    }
                 })
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 // * 0 . =
                 CalculatorButton(text = "^", containerColor = Color.DarkGray, onClick = {
-                    inputState.value += "^"
-                    operator.value = "^"
+                    try {
+                        firstNumber.value = inputState.value.toInt()
+                        operator.value = "^"
+                        inputState.value = ""
+                    } catch (e: Exception) {
+                        inputState.value = "Error"
+                    }
                 })
                 CalculatorButton(text = "0", containerColor = Color.DarkGray, onClick = {
-                    if (inputState.value.isEmpty())
-                    {
-                        firstNumber.value = 0
-                        inputState.value += "0"
-                    }
-                    else
-                    {
-                        firstNumber.value = inputState.value.toInt()
-                    }
+                    inputState.value = "0"
                 })
                 CalculatorButton(text = ".", containerColor = Color.DarkGray, onClick = {
-//                    firstNumber.value = inputState.value.toInt()
-                    operator.value = "."
-                    inputState.value += "."
+                    try {
+                        firstNumber.value = inputState.value.toInt()
+                        operator.value = "."
+                        inputState.value = ""
+                    } catch (e: Exception) {
+                        inputState.value = "Error"
+                    }
                 })
                 CalculatorButton(text = "=", containerColor = orange, onClick = {
+                    var flag  = false
                     try {
+                        Log.d("value", "Input State: ${inputState.value}")
                         secondNumber.value = inputState.value.toInt()
+                        Log.d("value", "First Number: ${firstNumber.value}")
                         Log.d("value", "Second Number: ${secondNumber.value}")
 
                         val res = when (operator.value) {
-                            "%" -> firstNumber.value!! * (secondNumber.value!!.toFloat() / 100)
-                            "X" -> (firstNumber.value!! * secondNumber.value!!).toFloat()
-                            "+" -> (firstNumber.value!! + secondNumber.value!!).toFloat()
-                            "-" -> (firstNumber.value!! - secondNumber.value!!).toFloat()
+                            "%" -> firstNumber.value!! * (secondNumber.value!! / 100)
+                            "X" -> (firstNumber.value!! * secondNumber.value!!)
+                            "+" -> (firstNumber.value!! + secondNumber.value!!)
+                            "-" -> (firstNumber.value!! - secondNumber.value!!)
                             "/" -> {
                                 if (secondNumber.value == 0) throw ArithmeticException("Divide by zero")
-                                (firstNumber.value!! / secondNumber.value!!).toFloat()
+                                (firstNumber.value!! / secondNumber.value!!)
                             }
+                            "+/-" -> secondNumber.value = -secondNumber.value!!
+                            "^" -> secondNumber.value!! * secondNumber.value!!
+
                             else -> 0f
                         }
 
                         result.value = res.toString()
-//                        inputState.value = ""
+                        inputState.value = res.toString()
                         operator.value = null
                         firstNumber.value = null
                         secondNumber.value = null
@@ -339,8 +251,8 @@ fun BackgroundTheme() {
                         Log.e("Calculator", "Error in calculation", e)
                     }
                 })
-
             }
+            inputState.value = ""
         }
     }
 }
@@ -374,7 +286,7 @@ fun InputTextField(state:MutableState<String>) {
         modifier = Modifier.padding(28.dp),
         value = state.value,
         readOnly = true,
-        textStyle = TextStyle(fontSize = 30.sp),
+        textStyle = TextStyle(fontSize = 30.sp, textAlign = TextAlign.Right),
         onValueChange = { state.value = it },
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Color.Transparent,
@@ -385,13 +297,4 @@ fun InputTextField(state:MutableState<String>) {
 
 }
 
-/*fun evaluateExpression(expression: String): String {
-    return try {
-        val cleanExpr = expression.replace("×", "*").replace("÷", "/")
-        val result = ExpressionBuilder(cleanExpr).build().evaluate()
-        result.toString()
-    } catch (e: Exception) {
-        "Error"
-    }
-}*/
 
